@@ -36,7 +36,7 @@
   (let [rows->columns (map vector (expand-str k (count s)) s)]
     (apply str (map #(get-in inverted-matrix  %) rows->columns))))
 
-(defn repeating-substr?
+(defn- repeating-substr?
   [s substr]
   (let [s-len (count s)
         substr-len (count substr)]
@@ -48,7 +48,7 @@
           (repeating-substr? (.substring s substr-len) substr)
           false)))))
 
-(defn shortest-repeating-substr
+(defn- shortest-repeating-substr
   [s]
   (let [substrs (map #(.substring s 0 %) (range 1 (count s)))]
     (first (drop-while #(not (repeating-substr? s %)) substrs))))
